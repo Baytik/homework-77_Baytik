@@ -32,12 +32,20 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', upload.single('image'), async (req, res) => {
-   const message = req.body;
+    const message = req.body;
+    if (message.message === '') {
+        res.status(400).send({error: 'Please enter message'});
+    }
+    else {
+    if (message.author === '') {
+        message.author = 'Anonymous';
+   }
    if (req.file) {
        message.image = req.file.filename;
    }
    await fileDb.addItem(message);
    res.send(message.id);
+    }
 });
 
 module.exports = router;

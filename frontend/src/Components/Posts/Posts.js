@@ -11,7 +11,6 @@ class Posts extends Component {
     }
 
     render() {
-        console.log(this.props.messages);
         return (
             <div className="Posts">
                 {Object.keys(this.props.messages).map((message) => (
